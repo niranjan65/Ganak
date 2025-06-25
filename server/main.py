@@ -23,10 +23,12 @@ load_dotenv()
 username = quote_plus(os.getenv("MONGODB_USER"))
 password = quote_plus(os.getenv("MONGODB_PASSWORD"))
 host = os.getenv("MONGODB_HOST")
-app_name = os.getenv("MONGODB_APP_NAME")
+# app_name = os.getenv("MONGODB_APP_NAME")
+app_name = "ganak"
 
 # Construct the URI
 MONGODB_URI = f"mongodb+srv://{username}:{password}@{host}/?appName={app_name}"
+# MONGODB_URI = f"mongodb+srv://niranjansinghhh16:KJcgad5JEyHyatdT@cluster0.mrefmbh.mongodb.net/?appName={app_name}"
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)

@@ -1,247 +1,347 @@
-// "use client";
-// import React from "react";
-// import { cn } from "@/utils/cn";
-// import {
-//   IconBrandGithub,
-//   IconBrandGoogle,
-//   IconBrandOnlyfans,
-// } from "@tabler/icons-react";
-// import { Label } from "@/components/ui/label";
-// import { Input } from "@/components/ui/input";
+'use client'
 
-// export default function SignupForm() {
-//   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-//     e.preventDefault();
-//     const formData = new FormData(e.currentTarget)
-//     console.log("Form submitted",  Array.from(formData.entries()));
-//   };
-//   return (
-//     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-//       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-//         Welcome to Aceternity
-//       </h2>
-//       <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-//         Login to aceternity if you can because we don&apos;t have a login flow
-//         yet
-//       </p>
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { Eye, EyeOff, User, Mail, Lock, MapPin, Loader2, CheckCircle, AlertCircle } from 'lucide-react'
 
-//       <form className="my-8" onSubmit={handleSubmit}>
-//         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
-//           <LabelInputContainer>
-//             <Label htmlFor="firstname">First name</Label>
-//             <Input id="firstname" placeholder="Tyler" type="text" />
-//           </LabelInputContainer>
-//           <LabelInputContainer>
-//             <Label htmlFor="lastname">Last name</Label>
-//             <Input id="lastname" placeholder="Durden" type="text" />
-//           </LabelInputContainer>
-//         </div>
-//         <LabelInputContainer className="mb-4">
-//           <Label htmlFor="email">Email Address</Label>
-//           <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
-//         </LabelInputContainer>
-//         <LabelInputContainer className="mb-4">
-//           <Label htmlFor="password">Password</Label>
-//           <Input id="password" placeholder="••••••••" type="password" />
-//         </LabelInputContainer>
-//         <LabelInputContainer className="mb-8">
-//           <Label htmlFor="twitterpassword">Your twitter password</Label>
-//           <Input
-//             id="twitterpassword"
-//             placeholder="••••••••"
-//             type="twitterpassword"
-//           />
-//         </LabelInputContainer>
-
-//         <button
-//           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-//           type="submit"
-//         >
-//           Sign up &rarr;
-//           <BottomGradient />
-//         </button>
-
-//         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-
-//         <div className="flex flex-col space-y-4">
-//           <button
-//             className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-//             type="submit"
-//           >
-//             <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-//             <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-//               GitHub
-//             </span>
-//             <BottomGradient />
-//           </button>
-//           <button
-//             className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-//             type="submit"
-//           >
-//             <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-//             <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-//               Google
-//             </span>
-//             <BottomGradient />
-//           </button>
-//           <button
-//             className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-//             type="submit"
-//           >
-//             <IconBrandOnlyfans className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-//             <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-//               OnlyFans
-//             </span>
-//             <BottomGradient />
-//           </button>
-//         </div>
-//       </form>
-//     </div>
-//   );
-// }
-
-// const BottomGradient = () => {
-//   return (
-//     <>
-//       <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-//       <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-//     </>
-//   );
-// };
-
-// const LabelInputContainer = ({
-//   children,
-//   className,
-// }: {
-//   children: React.ReactNode;
-//   className?: string;
-// }) => {
-//   return (
-//     <div className={cn("flex flex-col space-y-2 w-full", className)}>
-//       {children}
-//     </div>
-//   );
-// };
-
-
-"use client";
-import React from "react";
-import { cn } from "@/utils/cn";
-import {
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandOnlyfans,
-} from "@tabler/icons-react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-
-export default function SignupForm() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    console.log("Form submitted", Array.from(formData.entries()));
-  };
-
-  return (
-    <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-      <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-        Welcome to GANAK
-      </h2>
-      <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-        Login to GANAK if you can because we don&apos;t have a login flow yet
-      </p>
-
-      <form className="my-8" onSubmit={handleSubmit}>
-        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
-          <LabelInputContainer>
-            <Label htmlFor="firstname">First name</Label>
-            <Input id="firstname" name="firstname" placeholder="Tyler" type="text" />
-          </LabelInputContainer>
-          <LabelInputContainer>
-            <Label htmlFor="lastname">Last name</Label>
-            <Input id="lastname" name="lastname" placeholder="Durden" type="text" />
-          </LabelInputContainer>
-        </div>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Email Address</Label>
-          <Input id="email" name="email" placeholder="projectmayhem@fc.com" type="email" />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="password">Password</Label>
-          <Input id="password" name="password" placeholder="••••••••" type="password" />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-8">
-          <Label htmlFor="twitterpassword">Your twitter password</Label>
-          <Input id="twitterpassword" name="twitterpassword" placeholder="••••••••" type="password" />
-        </LabelInputContainer>
-
-        <button
-          className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-          type="submit"
-        >
-          Sign up &rarr;
-          <BottomGradient />
-        </button>
-
-        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-
-        <div className="flex flex-col space-y-4">
-          <button
-            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
-          >
-            <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              GitHub
-            </span>
-            <BottomGradient />
-          </button>
-          <button
-            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
-          >
-            <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              Google
-            </span>
-            <BottomGradient />
-          </button>
-          <button
-            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
-          >
-            <IconBrandOnlyfans className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              OnlyFans
-            </span>
-            <BottomGradient />
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+interface SignupFormData {
+  firstname: string
+  secondname: string
+  email: string
+  password: string
+  confirmPassword: string
+  address: string
 }
 
-const BottomGradient = () => {
-  return (
-    <>
-      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-    </>
-  );
-};
+interface ApiError {
+  detail: string | { msg: string; type: string }[]
+}
 
-const LabelInputContainer = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+export default function SignupForm() {
+  const router = useRouter()
+  const [formData, setFormData] = useState<SignupFormData>({
+    firstname: '',
+    secondname: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    address: ''
+  })
+  
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [errors, setErrors] = useState<Partial<SignupFormData>>({})
+  const [apiError, setApiError] = useState('')
+  const [success, setSuccess] = useState(false)
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<SignupFormData> = {}
+
+    if (!formData.firstname.trim()) {
+      newErrors.firstname = 'First name is required'
+    }
+
+    if (!formData.secondname.trim()) {
+      newErrors.secondname = 'Last name is required'
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address'
+    }
+
+    if (!formData.password) {
+      newErrors.password = 'Password is required'
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters long'
+    }
+
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = 'Please confirm your password'
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match'
+    }
+
+    if (!formData.address.trim()) {
+      newErrors.address = 'Address is required'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+    
+    // Clear error when user starts typing
+    if (errors[name as keyof SignupFormData]) {
+      setErrors(prev => ({ ...prev, [name]: '' }))
+    }
+    
+    // Clear API error when user makes changes
+    if (apiError) {
+      setApiError('')
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    if (!validateForm()) {
+      return
+    }
+
+    setIsLoading(true)
+    setApiError('')
+
+    try {
+      const response = await fetch('http://localhost:8000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstname: formData.firstname,
+          secondname: formData.secondname,
+          email: formData.email,
+          password: formData.password,
+          address: formData.address
+        }),
+      })
+
+      if (response.ok) {
+        setSuccess(true)
+        setTimeout(() => {
+          router.push('/login')
+        }, 2000)
+      } else {
+        const errorData: ApiError = await response.json()
+        if (typeof errorData.detail === 'string') {
+          setApiError(errorData.detail)
+        } else if (Array.isArray(errorData.detail)) {
+          setApiError(errorData.detail[0]?.msg || 'Validation error occurred')
+        } else {
+          setApiError('An error occurred during signup')
+        }
+      }
+    } catch (error) {
+      setApiError('Network error. Please check your connection and try again.')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  if (success) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md text-center">
+          <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Account Created!</h2>
+          <p className="text-gray-600 mb-4">
+            Your account has been successfully created. Redirecting to login...
+          </p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div className={cn("flex flex-col space-y-2 w-full", className)}>
-      {children}
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
+        <div className="text-center mb-8">
+          <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <User className="w-8 h-8 text-blue-600" />
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900">Create Account</h1>
+          <p className="text-gray-600 mt-2">Join us today and get started</p>
+        </div>
+
+        {apiError && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start space-x-3">
+            <AlertCircle className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+            <p className="text-red-700 text-sm">{apiError}</p>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="firstname" className="block text-sm font-medium text-gray-700 mb-2">
+                First Name
+              </label>
+              <input
+                type="text"
+                id="firstname"
+                name="firstname"
+                value={formData.firstname}
+                onChange={handleInputChange}
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                  errors.firstname ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                }`}
+                placeholder="John"
+              />
+              {errors.firstname && (
+                <p className="mt-1 text-sm text-red-600">{errors.firstname}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="secondname" className="block text-sm font-medium text-gray-700 mb-2">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="secondname"
+                name="secondname"
+                value={formData.secondname}
+                onChange={handleInputChange}
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                  errors.secondname ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                }`}
+                placeholder="Doe"
+              />
+              {errors.secondname && (
+                <p className="mt-1 text-sm text-red-600">{errors.secondname}</p>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              Email Address
+            </label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className={`w-full pl-12 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                  errors.email ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                }`}
+                placeholder="john@example.com"
+              />
+            </div>
+            {errors.email && (
+              <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              Password
+            </label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                className={`w-full pl-12 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                  errors.password ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                }`}
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              </button>
+            </div>
+            {errors.password && (
+              <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+              Confirm Password
+            </label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type={showConfirmPassword ? 'text' : 'password'}
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                className={`w-full pl-12 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                  errors.confirmPassword ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                }`}
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              </button>
+            </div>
+            {errors.confirmPassword && (
+              <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
+              Address
+            </label>
+            <div className="relative">
+              <MapPin className="absolute left-3 top-4 text-gray-400 w-5 h-5" />
+              <textarea
+                id="address"
+                name="address"
+                value={formData.address}
+                onChange={handleInputChange}
+                rows={3}
+                className={`w-full pl-12 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none ${
+                  errors.address ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                }`}
+                placeholder="Enter your full address"
+              />
+            </div>
+            {errors.address && (
+              <p className="mt-1 text-sm text-red-600">{errors.address}</p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="animate-spin w-5 h-5 mr-2" />
+                Creating Account...
+              </>
+            ) : (
+              'Create Account'
+            )}
+          </button>
+        </form>
+
+        <div className="mt-6 text-center">
+          <p className="text-gray-600">
+            Already have an account?{' '}
+            <Link href="/login" className="text-blue-600 hover:text-blue-700 font-medium">
+              Sign in
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
-  );
-};
-
+  )
+}
